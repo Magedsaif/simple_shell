@@ -1,26 +1,43 @@
 #include "shell.h"
 
+/**
+ * paths_to_linkedlist - a function that returns a linked list of paths
+ * tokenized from path enviroment variable (PEV).
+ *
+ * Return: a linked list, which contains the paths extracted
+ * from the "PATH" environment variable.
+*/
 list_paths *paths_to_linkedlist()
 {
-	char *path_variable, *copied_variable, *token;
 	list_paths *paths_linkedlists;
+	char *copied_variable,*path_variable, *token;
 
 	paths_linkedlists = NULL;
+
+	/*getting the PEV and store it at a pointer to char*/
 	path_variable = _getenv("PATH");
 	if (path_variable == NULL)
 		return (NULL);
-
+	/*copying PEV to a new one to start handling it*/
 	copied_variable = _strdup(path_variable);
 	if (copied_variable == NULL)
 		return (NULL);
-
+	/*Tokenising the New PEV by (:) delimeter*/
 	token = strtok(copied_variable, ":");
-	while (token != NULL)
-	{
+	while (token != NULL)/*looping tell the end*/
+	{	
+		/*adding each token in path as a node in LL */
 		add_node(&paths_linkedlists, token);
+		/*
+		* each call will return the next token in the
+		* string until there are no more tokens left
+		*/
 		token = strtok(NULL, ":");
 	}
-
+	/*
+	* returns a linked list, which contains the paths extracted from
+	* the "PATH" environment variable.
+	*/
 	return (paths_linkedlists);
 }
 
@@ -35,7 +52,7 @@ list_paths *add_node(list_paths **head, const char *path)
 	list_paths *new;
 	int i = 0;
 
-	/*getting the count of elments (i), in str array of chars*/
+	/*getting the count of elements (i), in str array of chars*/
 	while (path[i] != '\0')
 	{
 		i++;
@@ -73,10 +90,16 @@ void free_list(list_paths *head)
 	list_paths *nextNode;
 
 	while (ptr != NULL)
-	{
-		nextNode = ptr->next;/*saves a pointer to the next node in the list*/
+	{	
+		/**
+		* saves a pointer to the next node in the list
+		* so we don't loose track of the linked list
+		*/
+
+		nextNode = ptr->next;
 		free(ptr->path);
 		free(ptr);
+		/*moving the pointer to the next node*/
 		ptr = nextNode;
 	}
 
