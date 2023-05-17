@@ -25,3 +25,8 @@ char *_getenv(const char *name)
 	}
 	return (value);
 }
+
+void command_executer(char *path, char **av, char **env)
+{
+
+}
