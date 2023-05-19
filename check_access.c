@@ -4,14 +4,14 @@
 /* Args: line from user entered by getline and path list */
 /* Return: full path of the command if it is found and executable, NULL otherwise */
 
-char *check_access(char *line, list_path *path_list)
+char *check_access(char *line, list_paths *path_list)
 {
 	char *token;
 	char *full_path = NULL;
 	size_t token_len;
     size_t path_len;
 	struct stat file_stat;
-	list_path *current = path_list; /*pointer to linkedlist*/
+	list_paths *current = path_list; /*pointer to linkedlist*/
 
 	token = strtok(line, " \t\n");
 	if (token == NULL || path_list == NULL)
