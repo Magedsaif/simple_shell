@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -8,6 +9,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <limits.h>
+
+#define INTERACTIVE_MODE 1
+#define NON_INTERACTIVE_MODE 0
+#define ERROR -1
 
 /**
  * struct list_paths - a struct made for nodes out of enviroment variable path

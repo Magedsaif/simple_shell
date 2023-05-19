@@ -34,6 +34,7 @@ list_paths *paths_to_linkedlist()
 		*/
 		token = strtok(NULL, ":");
 	}
+	free(copied_variable);
 	/*
 	* returns a linked list, which contains the paths extracted from
 	* the "PATH" environment variable.
@@ -51,7 +52,9 @@ list_paths *add_node(list_paths **head, const char *path)
 {
 	list_paths *new;
 	int i = 0;
+	char* string_path;
 
+	
 	/*getting the count of elements (i), in str array of chars*/
 	while (path[i] != '\0')
 	{
@@ -63,16 +66,24 @@ list_paths *add_node(list_paths **head, const char *path)
 	if (new == NULL)
 		return (NULL);
 
-
+	if (path)
+	{
 	/*duplicating the contents of path in path element of the new node created*/
-	new->path = _strdup(path);
-	if (new->path == NULL)
+	string_path = _strdup(path);
+	if (string_path == NULL)
 	{
 		free(new);
 		return (NULL);
 	}
 	/*updating len element with the length of the new path entered*/
 	new->len = i;
+	new->path = string_path;
+	}
+	else
+	{
+		new->len = 0;
+		new->path = NULL;
+	}
 	/*updating the next pointer with a pointer to the new node*/
 	new->next = (*head);
 
@@ -115,8 +126,12 @@ size_t print_list(const list_paths *h)
 {
 	int count;
 
+	if (h == NULL)
+	{
+		return (0);
+	}
 	count = 0;
-	while (h != NULL)
+	while (h)
 	{
 		if (h->path == NULL)
 			printf("[0] (nil)\n");
