@@ -1,38 +1,12 @@
 #include "shell.h"
 /**
- * _getenv - a fnction to get enviroment variabe
- * @name: name of enviroment variable to get the value of
- * Return: the value of the enviroment varable
+ * command_executer - a function that execute commands
+ * @path:.
+ * @env:
+ * @av:
+ * Return:.
 */
-
-char *_getenv(const char *name)
-{
-	int i;
-	char *variable_name;
-	char *variable_value;
-	char *value = NULL;
-
-	/*loop through the enviroment variables strored at environ*/
-	for (i = 0; environ[i] != NULL; i++)
-	{	
-		/*getting the name of the enviroment variable*/
-		variable_name = strtok(environ[i], "=");
-		/*getting the value corresponding to the name*/
-		variable_value = strtok(NULL, "=");
-
-		/*comparing the variable's name given by user and the list of EV's*/
-		if (strcmp(variable_name, name) == 0)
-		{
-			/*if found assign the value of EV's to value*/
-			value = variable_value;
-			break;
-		}
-	}
-	/*returning the value of assigned after finding the EV*/
-	return (value);
-}
-
-void command_executer(char *path, char **av, char **env)
+void command_executer(char *path, char **av, char **env, int *status)
 {
 	pid_t parent_id;
 
@@ -58,17 +32,37 @@ void command_executer(char *path, char **av, char **env)
 	}
 
 }
-
-/*
- * mode_checking - check the mode of the terminal
- * @argc: arguements count in terminal
- * Return : mode to deal with
- */
-int mode_checking(int argc)
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+*/
+char *scan_cmd_user(list_paths *current)
 {
-	if(argc == 1)
-		return (INTERACTIVE_MODE);
-	else if(argc == 2)
-		return (NON_INTERACTIVE_MODE);
-	return (ERROR);
+	ssize_t read;
+	size_t n = 0;
+	char *command = NULL;
+	/*prompt ($) and getting the input from the user*/
+	write(STDOUT_FILENO, "($) ", 5);
+	read = getline(&command, &n, stdin);
+	/*dealing with end of file or ctrl + D*/
+	if (read == EOF)
+	{
+		/*write new line and free*/
+		write(STDOUT_FILENO, "\n", 1);
+		free_list(current);
+		free(command);
+		exit(0);
+	}
+
+	if(read == 1 && command[0] == '\n')
+	{
+		free(command);
+		return (NULL);
+	}
+	command[read - 1] = '\0';
+
+	return (command);
 }

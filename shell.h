@@ -38,7 +38,13 @@ char *_strncpy(char *dest, char *src, int n);
 char *_strncat(char *dest, char *src, int n);
 char *_getenv(const char *name);
 void print_env(char ** line);
-
-
+int check_mode(int argc);
+char *check_access(char *line, list_paths *path_list);
+void free_array(char** argv);
+char *scan_cmd_user(list_paths *current);
+void is_exit(char *command,char **command_array, list_paths *current);
+void free_array(char** argv);
+void command_executer(char *path, char **av, char **env, int *status);
+char *scan_cmd_file(char *file);
+void check_input_file(char *file);
 #endif
-
