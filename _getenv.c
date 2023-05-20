@@ -14,7 +14,7 @@ char *_getenv(const char *name)
 
 	/*loop through the enviroment variables strored at environ*/
 	for (i = 0; environ[i] != NULL; i++)
-	{	
+	{
 		/*getting the name of the enviroment variable*/
 		variable_name = strtok(environ[i], "=");
 		/*getting the value corresponding to the name*/
