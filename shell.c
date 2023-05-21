@@ -1,4 +1,4 @@
-#include"shell.h"
+#include "shell.h"
 
 int main(int argc, char *argv[], char *env[])
 {
@@ -32,13 +32,15 @@ int main(int argc, char *argv[], char *env[])
 			free(command);
 			continue;
 		}/*handle the built in and deal with it's commands*/
+
 		if (builtin_handler(command, command_array, current, argv[0], count, status) != 0)/*----lsa----*/
 			{
 			if (access(command_array[0],X_OK) == 0)
 				command_executer(command_array[0], command_array, env, status);
 				else
 				{	/*if the user just entered the command without the whole path*/
-					if (new_path == check_access(command_array[0], current))
+					new_path = check_access(command_array[0], current);
+					if (new_path)
 					{
 						command_executer(new_path, command_array, env, status);
 						free(new_path);

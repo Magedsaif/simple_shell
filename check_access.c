@@ -4,62 +4,41 @@
 /* Args: line from user entered by getline and path list */
 /* Return: full path of the command if it is found and executable, NULL otherwise */
 
-char *check_access(char *line, list_paths *path_list)
+char *check_access(char *command, list_paths *current)
 {
-	char *token;
-	char *full_path = NULL;
-	size_t token_len;
-    size_t path_len;
-	struct stat file_stat;
-	list_paths *current = path_list; /*pointer to linkedlist*/
-	 int found_executable = 0;
+	char *full_path;
+	int found = 0, len;
 
-	token = strtok(line, " \t\n");
-	if (token == NULL || path_list == NULL)
-	{
+	if (current == NULL)
 		return (NULL);
-	}
-
-	/*search path for corresponding excutable*/
-	while (current != NULL)
+	while (current)
 	{
-		path_len = _strlen(current->path);
-		token_len = _strlen(token);
-				/* create the full path*/
-		full_path = malloc(sizeof(char) * (path_len + token_len + 2));
-		if (full_path == NULL)
+		len = strlen(current->path) + strlen(command) + 2; /* to calculate the length of the full path*/
+		if (len > 1024)
 		{
-			return NULL;
+			write(STDERR_FILENO, "ERROR: Path too long\n", 21);
+			continue;
 		}
-
-		/*fill full path with path + '/' + token by coppying into full_path*/
-		_strcpy(full_path, current->path); /*path went*/
-		_strcat(full_path, "/");
-		_strcat(full_path, token);
-		full_path[path_len] = '\0';
-		/*end of full path concat*/
-
-		/*use stat to check stat() to check if a file exists and is executable*/
-		if (stat(full_path, &file_stat) == 0 && file_stat.st_mode & S_IXUSR)
+		full_path = (char *)malloc(len * sizeof(char));
+		strcpy(full_path,current->path);
+		strcat(full_path, "/");
+		strcat(full_path, command);
+		if (access(full_path, X_OK) == 0)
 		{
-			 found_executable = 1;
+			found = 1;
+			break;
 		}
-		else{
+		else
 			free(full_path);
-		}
-		free(full_path); /*malloced previously*/
-		current = current->next; /*move to next dir*/
-	}
-	if (found_executable)
-    {
-        return (full_path);
-    }
-    else
-    {
-        free(full_path); /* free memory if no executable path is found */
-        return (NULL);
-    }
 
+		current = current->next;
+	}
+	if (found)
+		return (full_path);
+
+	else
+			return (NULL);
 }
+
 
 

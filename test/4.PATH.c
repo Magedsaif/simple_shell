@@ -19,7 +19,7 @@ char *_strdup(char *str);
 /*---------------------------------------------------------*/
 /*turning the paths to linked lists*/
 
-list_paths *paths_to_linkedlist()
+list_paths *()
 {
     char *path_variable, *copied_variable, *token;
     list_paths *paths_linkedlists;

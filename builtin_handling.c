@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
 */
 void print_env(int *status)
 {
@@ -18,11 +18,11 @@ void print_env(int *status)
 	*status = 0;
 }
 /**
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
 */
 
 char *get_process_id()
@@ -50,8 +50,8 @@ int builtin_handler(char *command, char **command_array ,list_paths *current, ch
 	}
 	if(n == -1)
 		return (n);
-	
-	switch (n) 
+
+	switch (n)
 	{
     case 0:
         print_env(status);
