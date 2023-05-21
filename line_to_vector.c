@@ -3,51 +3,103 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#include<sys/types.h>
+#include<unistd.h>
 
-#define MAX_STR_LEN 100 /*arg len*/
-#define MAX_STR_NUM 10	/*args count*/
+/*function to convert int to str*/
+void int_to_str(int n, char *str)
+{
+	int i = 0;
+	if (n == 0)
+	{
+		str[i++] = '0';
+	}
+	int tmp = n;
+	while (tmp > 0)
+	{
+		tmp /= 10;
+		i++; /* calc str length needed*/
+	}
+	tmp = n;
+	while (i > 0)
+	{
+		str[--i] = tmp % 10 + '0'; /*store rightmost and move backward*/
+		tmp /= 10; /*remove rightmost*/
+
+	}
+	str[i] = '\0'; /*null term*/
+
+}
+int line_count(char *line)
+{
+	int i = 0;
+	while (*line != '\0')
+	{
+		i++;
+		line++;
+	}
+	return (i);
+}
 
 /*function converts line input into array of strings*/
 /*reurn ptr to this arr of strings*/
 
-char **line_to_vector(char *command, int status)
+char **line_to_vector(char *line)
 {
-	char *token, *command_tokenized;
+	char *token, *command;
 	int i = 0;
-	char *command_copy;
+	char *line_copy;
 
 	/*duplicate line*/
-	command_copy = _strdup(command);
-	if (command_copy == NULL)
-        return (NULL);
-	char **vector = malloc(sizeof(char *) * MAX_STR_NUM + 1);
+	line_copy = _strdup(line);
+	char **vector = malloc(sizeof(char *) * (line_count(line) + 1));
 	if (vector == NULL)
+	{
+		free(line_copy);
 		return (NULL);
+	}
 	/*tokenize at space delimeter*/
-	token = strtok(command_copy, " ");
+	token = strtok(line_copy, " ");
 	/*exclude $ and $$ */
-		if (_strcmp(token, "$?") != 0 || _strcmp(token, "$$") != 0)
+		if (_strcmp(token, "$") != 0 && _strcmp(token, "$$") != 0)
 		{
-			command_tokenized = _strdup(token); /*not on token directly*/
-			vector[i++] = command_tokenized;
+			command = _strdup(token); /*not on token directly*/
+			vector[i++] = command;
+
 		}
+
 	/*fill vector with tokens  one after another*/
 	while (token != NULL)
 	{
 		token = strtok(NULL, " ");
 		if (token != NULL)
 		{
-            if (_strcmp("$$", token) == 0)
-                command_tokenized = get_process_id();
-			else if (_strcmp("$?", token) == 0)
-				command_tokenized = get_status(status);
+			if (_strcmp(token, "$$") == 0)
+			{
+				int pid = getpid();
+				char pid_str[16]; /*max sizeof pid*/
+				int_to_str(pid, pid_str);
+				command = _strdup(pid_str);
+				vector[i++] = command;
+
+
+			}
+			else if (_strcmp(token, "$") == 0)
+			{
+			}
 			else
-			command_tokenized = _strdup(token);
-			vector[i++] = command_tokenized;
+			{
+				command = _strdup(token);
+				vector[i++] = command;
+			}
+
 		}
+
 	}
 	vector[i] = NULL;
-	free(command_copy);
+	free(line_copy);
 	return (vector);
 
 }
+
+
