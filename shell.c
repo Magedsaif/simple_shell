@@ -3,27 +3,28 @@
 int main(int argc, char *argv[], char *env[])
 {
 	int mode, *status, count = 0, s = 0, non_interactive = 1;
-	char *command, **command_array = NULL, *new_path;
+	char *command, **command_array = NULL;
+	char *new_path = NULL;
 	list_paths *current;
 
-	mode = mode_checking(argc);/*checking op. mode by getting the arg count*/
+	mode = check_mode(argc);/*checking op. mode by getting the arg count*/
 	current = paths_to_linkedlist();/*turning the path current to a linked */
 	if (mode == NON_INTERACTIVE_MODE)/*checking the file after the command*/
 		check_input_file(argv[1]);/*----lsa----*/
 	status = &s;
 	while (non_interactive && ++count)
-	{	
+	{
 		if (mode == NON_INTERACTIVE_MODE)/*deal with commands from a file*/
 		{
-			command = scan_cmd_file(argv[1]);/*----lsa----*/
-			non_interactive = 0;
+		scan_cmd_file(argv[1]);/*----lsa---- remove assign to command bcoz void fn*/
+		non_interactive = 0;
 		}
-		else if (mode = INTERACTIVE_MODE)
+		else if (mode == INTERACTIVE_MODE)
 			command = scan_cmd_user(current);/*prompt user&get command*/
 		if(!command)
 			continue;
-		command_array = line_to_vector(command, *status);
-		if (is_directory(command_array[0] == 0));/*----lsa----*/
+		command_array = line_to_vector(command);
+		if (is_dir(command_array[0]) == 0)
 		{
 			print_error(argv[0], count, command_array[0], PERMISSION_DENIED);
 			*status = PERMISSION_DENIED;
@@ -37,7 +38,7 @@ int main(int argc, char *argv[], char *env[])
 				command_executer(command_array[0], command_array, env, status);
 				else
 				{	/*if the user just entered the command without the whole path*/
-					if (new_path = check_access(command_array[0], current))
+					if (new_path == check_access(command_array[0], current))
 					{
 						command_executer(new_path, command_array, env, status);
 						free(new_path);

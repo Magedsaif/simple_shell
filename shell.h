@@ -39,7 +39,8 @@ extern char **environ;
 list_paths *paths_to_linkedlist();
 size_t print_list(const list_paths *h);
 void free_list(list_paths *head);
-list_paths *add_node(list_paths **head, const char *path);
+/* list_paths *add_node(list_paths **head, const char *path);*/
+list_paths *add_node(list_paths **head, char *path);
 /*-----------*/
 int _strlen(char *s);
 char *_strdup(char *str);
@@ -58,7 +59,8 @@ void command_executer(char *path, char **av, char **env, int *status);
 void scan_cmd_file(char *file);
 char *check_input_file(char *file);
 void free_list(list_paths *head);
-char **line_to_vector(char *command, int status);
+/*char **line_to_vector(char *command, int status);*/
+char **line_to_vector(char *line);
 char *num_to_char(int num);
 void print_error(char *shell_name , int count,char *command_array, int type_of_error);
 char *num_to_char(int num);

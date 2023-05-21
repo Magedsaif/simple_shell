@@ -25,7 +25,7 @@ list_paths *paths_to_linkedlist()
 	/*Tokenising the New PEV by (:) delimeter*/
 	token = strtok(copied_variable, ":");
 	while (token != NULL)/*looping tell the end*/
-	{	
+	{
 		/*adding each token in path as a node in LL */
 		add_node(&paths_linkedlists, token);
 		/*
@@ -48,13 +48,13 @@ list_paths *paths_to_linkedlist()
  * @str: pointer to char
  * Return: the address of the new element, or NULL if it failed
 */
-list_paths *add_node(list_paths **head, const char *path)
+list_paths *add_node(list_paths **head, char *path) /*remove const from const char *path*/
 {
 	list_paths *new;
 	int i = 0;
 	char* string_path;
 
-	
+
 	/*getting the count of elements (i), in str array of chars*/
 	while (path[i] != '\0')
 	{
@@ -101,7 +101,7 @@ void free_list(list_paths *head)
 	list_paths *nextNode;
 
 	while (ptr != NULL)
-	{	
+	{
 		/**
 		* saves a pointer to the next node in the list
 		* so we don't loose track of the linked list

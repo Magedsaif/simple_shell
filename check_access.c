@@ -30,6 +30,7 @@ char *check_access(char *line, list_paths *path_list)
 		{
 			return NULL;
 		}
+
 		/*fill full path with path + '/' + token by coppying into full_path*/
 		_strcpy(full_path, current->path); /*path went*/
 		_strcat(full_path, "/");
@@ -43,10 +44,7 @@ char *check_access(char *line, list_paths *path_list)
 			return (full_path);
 		}
 		free(full_path); /*malloced previously*/
-
 		current = current->next; /*move to next dir*/
-
-
 	}
 	return (NULL);
 }

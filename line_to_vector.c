@@ -9,12 +9,13 @@
 /*function to convert int to str*/
 void int_to_str(int n, char *str)
 {
+	int tmp;
 	int i = 0;
 	if (n == 0)
 	{
 		str[i++] = '0';
 	}
-	int tmp = n;
+	tmp = n;
 	while (tmp > 0)
 	{
 		tmp /= 10;
@@ -46,13 +47,14 @@ int line_count(char *line)
 
 char **line_to_vector(char *line)
 {
+	char **vector;
 	char *token, *command;
 	int i = 0;
 	char *line_copy;
 
 	/*duplicate line*/
 	line_copy = _strdup(line);
-	char **vector = malloc(sizeof(char *) * (line_count(line) + 1));
+	vector = malloc(sizeof(char *) * (line_count(line) + 1));
 	if (vector == NULL)
 	{
 		free(line_copy);
