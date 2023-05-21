@@ -10,90 +10,44 @@
 /*function converts line input into array of strings*/
 /*reurn ptr to this arr of strings*/
 
-char **line_to_vector(char *line)
+char **line_to_vector(char *command, int status)
 {
-	char *token, *command;
+	char *token, *command_tokenized;
 	int i = 0;
-	char *line_copy;
+	char *command_copy;
 
 	/*duplicate line*/
-	line_copy = _strdup(line);
+	command_copy = _strdup(command);
+	if (command_copy == NULL)
+        return (NULL);
 	char **vector = malloc(sizeof(char *) * MAX_STR_NUM + 1);
 	if (vector == NULL)
-	{
 		return (NULL);
-	}
 	/*tokenize at space delimeter*/
-	token = strtok(line_copy, " ");
+	token = strtok(command_copy, " ");
 	/*exclude $ and $$ */
-		if (_strcmp(token, "$") != 0 || _strcmp(token, "$$") != 0)
+		if (_strcmp(token, "$?") != 0 || _strcmp(token, "$$") != 0)
 		{
-			command = _strdup(token); /*not on token directly*/
-			vector[i++] = command;
+			command_tokenized = _strdup(token); /*not on token directly*/
+			vector[i++] = command_tokenized;
 		}
-
 	/*fill vector with tokens  one after another*/
 	while (token != NULL)
 	{
-
-		if (_strcmp("$$", token) == 0)
-		{
-			pid_t pid = getpid();
-			char pid_str[16];
-			sprintf(pid_str, "%d\n", pid);
-			write(STDOUT_FILENO, pid_str, strlen(pid_str));
-		}
-
-		else if (_strcmp("$?", token) == 0)
-			{
-			char *str = malloc(strlen(command) + strlen(": command not found") + 1);
-			_strncpy(str, command, _strlen(str));
-			_strncat(str, ": command not found", strlen(": command not found"));
-			write(STDOUT_FILENO, str, _strlen(str));
-			free(str);
-			}
-		else
-			{
-				command = _strdup(token);
-			}
-			vector[i++] = command;
-
 		token = strtok(NULL, " ");
+		if (token != NULL)
+		{
+            if (_strcmp("$$", token) == 0)
+                command_tokenized = get_process_id();
+			else if (_strcmp("$?", token) == 0)
+				command_tokenized = get_status(status);
+			else
+			command_tokenized = _strdup(token);
+			vector[i++] = command_tokenized;
+		}
 	}
 	vector[i] = NULL;
-	free(line_copy);
+	free(command_copy);
 	return (vector);
 
 }
-int main(void)
-{
-    char line[MAX_STR_LEN];
-    char **vector;
-    int i;
-
-    printf("Enter a command: ");
-    fgets(line, MAX_STR_LEN, stdin);
-    /* Remove newline character from input */
-    line[strcspn(line, "\n")] = '\0';
-
-    vector = line_to_vector(line);
-
-    if (vector == NULL)
-    {
-        printf("Error: unable to allocate memory\n");
-        return 1;
-    }
-
-    printf("Vector:\n");
-    for (i = 0; vector[i] != NULL; i++)
-    {
-        printf("[%d] %s\n", i, vector[i]);
-    }
-
-    free(vector);
-
-    return 0;
-}
-
-
-

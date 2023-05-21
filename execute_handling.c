@@ -14,7 +14,7 @@ void command_executer(char *path, char **av, char **env, int *status)
 	/*if there is error in forking*/
 	if (parent_id < 0)
 	{
-		perror("forh has failed");
+		perror("fork has failed");
 		exit(EXIT_FAILURE);
 	}
 	/*if the forking has succeeded then execute*/
@@ -28,9 +28,9 @@ void command_executer(char *path, char **av, char **env, int *status)
 	else if (parent_id > 0)
 	{	
 		/*then wait till the child process execute it's commands*/
-		wait(NULL);
+		waitpid(parent_id, status, WUNTRACED);
+		*status  = WEXITSTATUS(*status);
 	}
-
 }
 /**
  * 

@@ -31,29 +31,19 @@ int _strlen(char *s)
 */
 char *_strdup(char *str)
 {
-	char *newstr;
-	unsigned int i = 0;
-	unsigned int j;
+	int len;
+	char *arr;
 
 	if (str == NULL)
-	{
 		return (NULL);
-	}
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	newstr = malloc(i + 1);
-	if (newstr == NULL)
-	{
+	len = _strlen(str);
+	arr = malloc((sizeof(char) * len) + 1);
+	if (arr == NULL)
 		return (NULL);
-	}
-	for (j = 0; j <= i + 1; j++)
-	{
-		newstr[j] = str[j];
-	}
-	return (newstr);
-
+	arr[len] = '\0';
+	while (len--)
+		arr[len] = str[len];
+	return (arr);
 }
 
 /**
@@ -87,43 +77,35 @@ int _strcmp(char *s1, char *s2)
  * @n: number of bytes from src
  * Return: a pointer to the resulting string dest
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strcpy(char *dest, char *src)
 {
-	int len, i;
+	int i;
 
-	len = _strlen(src);
-	for (i = 0; i < n; i++)
+	for (i = 0; src[i] != '\0'; i++)
 	{
-		if (i < len)
-			dest[i] = src[i];
-		else
-			dest[i] = '\0';
+		dest[i] = src[i];
 	}
+	dest[i] = '\0';
 	return (dest);
-
 }
+
 
 /**
  * _strncat - concats two arrays
  *
  * @dest: destination of concat
  * @src: source array to concat
- * @n: number of bytes from src
  * Return: a pointer to the resulting string dest
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strcat(char *dest, char *src)
 {
-	int i;
-	int j;
+	int len, i;
 
-	for (j = 0; dest[j] != '\0'; j++)
-	{}
-
-	for (i = 0; i < n && src[i] != '\0'; i++)
+	len = _strlen(dest);
+	for (i = 0; src[i] != '\0'; i++)
 	{
-		dest[j + i] = src[i];
+		dest[len + i] = src[i];
 	}
-
+	dest[len + i] = '\0';
 	return (dest);
-
 }
