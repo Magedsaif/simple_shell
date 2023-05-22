@@ -1,6 +1,7 @@
 #include"shell.h"
+/*BETTY OKAY*/
 /**
- * _getenv - a fnction to get enviroment variabe
+ * _getenv - a fUnction to get enviroment variabe
  * @name: name of enviroment variable to get the value of
  * Return: the value of the enviroment varable
 */

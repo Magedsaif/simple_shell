@@ -1,11 +1,15 @@
 #include "shell.h"
+/*BETTY OKAY*/
 /**
- * command_executer - a function that execute commands
- * @path:.
- * @env:
- * @av:
- * Return:.
-*/
+ * command_executer - Executes commands given.
+ *
+ * @path: The path of the command to execute.
+ * @av: An array of strings containing the command and its arguments.
+ * @env: An array of strings representing the environment variables.
+ * @status: A pointer to an integer variable to set the status.
+ *
+ * Returns: NOTHING.
+ */
 void command_executer(char *path, char **av, char **env, int *status)
 {
 	pid_t parent_id;
@@ -26,19 +30,19 @@ void command_executer(char *path, char **av, char **env, int *status)
 	}
 	/*if pid is greater than 0 then that's not a child process*/
 	else if (parent_id > 0)
-	{	
+	{
 		/*then wait till the child process execute it's commands*/
 		waitpid(parent_id, status, WUNTRACED);
 		*status  = WEXITSTATUS(*status);
 	}
 }
 /**
- * 
- * 
- * 
- * 
- * 
-*/
+ * scan_cmd_user - Scans and retrieves user input command.
+ *
+ * @current: A pointer to a list_paths struct representing the current path.
+ *
+ * Return: command after scanning.
+ */
 char *scan_cmd_user(list_paths *current)
 {
 	ssize_t read;
@@ -56,12 +60,13 @@ char *scan_cmd_user(list_paths *current)
 		free(command);
 		exit(0);
 	}
-
-	if(read == 1 && command[0] == '\n')
+	/* If the user enters a blank line, return NULL */
+	if (read == 1 && command[0] == '\n')
 	{
 		free(command);
 		return (NULL);
 	}
+
 	command[read - 1] = '\0';
 
 	return (command);
