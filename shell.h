@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -15,7 +15,7 @@
 #define EXIT_ERROR 2
 
 #define INTERACTIVE_MODE 1
-#define NON_INTERACTIVE_PIPED 2
+#define NON_INTERACTIVE_PIPE 2
 #define NON_INTERACTIVE_MODE 0
 #define ERROR -1
 #define TOK_D " \t\r\n\a\""

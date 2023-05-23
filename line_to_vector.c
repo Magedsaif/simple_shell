@@ -1,49 +1,4 @@
 #include "shell.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <unistd.h>
-#include<sys/types.h>
-#include<unistd.h>
-
-/*function to convert int to str*/
-void int_to_str(int n, char *str)
-{
-	int tmp;
-	int i = 0;
-	if (n == 0)
-	{
-		str[i++] = '0';
-	}
-	tmp = n;
-	while (tmp > 0)
-	{
-		tmp /= 10;
-		i++; /* calc str length needed*/
-	}
-	tmp = n;
-	while (i > 0)
-	{
-		str[--i] = tmp % 10 + '0'; /*store rightmost and move backward*/
-		tmp /= 10; /*remove rightmost*/
-
-	}
-	str[i] = '\0'; /*null term*/
-
-}
-int line_count(char *line)
-{
-	int i = 0;
-	while (*line != '\0')
-	{
-		i++;
-		line++;
-	}
-	return (i);
-}
-
-/*function converts line input into array of strings*/
-/*reurn ptr to this arr of strings*/
 
 char **line_to_vector(char *line)
 {
@@ -103,5 +58,17 @@ char **line_to_vector(char *line)
 	return (vector);
 
 }
+
+int line_count(char *line)
+{
+	int i = 0;
+	while (*line != '\0')
+	{
+		i++;
+		line++;
+	}
+	return (i);
+}
+
 
 

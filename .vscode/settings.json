@@ -36,7 +36,8 @@
   "C_Cpp_Runner.useAddressSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "files.associations": {
-    "stat.h": "c"
+    "stat.h": "c",
+    "shell.h": "c"
   },
   "files.insertFinalNewline": true,
   "files.eol": "\n"
