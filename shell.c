@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	int op_mode, *status, count = 0, s = 0, non_interactive = 1;
+	int *status, count = 0, s = 0, non_interactive = 1, op_mode;
 	char *command,**command_lines, **command_array = NULL, *new_path = NULL;
 	list_paths *current;
 
@@ -28,19 +28,17 @@ int main(int argc, char *argv[], char *env[])
 		if (!command_array)
 			free(command);
 			continue;
-		if (is_dir(command_array[0]) == 0)
+		if (directory_check(command_array[0]) == 0)
 		{
 			print_error(argv[0], count, command_array[0], PERMISSION_DENIED);
 			*status = PERMISSION_DENIED;
-			free_array(command_array);
-			free(command);
+			free_l_v(command, command_array);
 			continue;
 		}/*handle the built in and deal with it's commands*/
 		if (builtin_handler(command, command_array, current, argv[0], count, status) != 0)/*----lsa----*/
 			nonbuiltin_handler(command_array, env, status,
 			count, current,argv);
-		free_array(command_array);
-		free(command);
+		free_l_v(command, command_array);
 	}
-	return (0);
+	exit(*status);
 }

@@ -12,7 +12,7 @@ char *get_process_id()
 	pid_t pid = getpid();
 
 	/* Convert the process ID to a string */
-	ppid_s = num_to_char(pid);
+	ppid_s = number_to_character(pid);
 
 	/* Return the string representation of the process ID */
 	return (ppid_s);

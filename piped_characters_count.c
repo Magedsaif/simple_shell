@@ -6,15 +6,15 @@
  * 
  * 
 */
-unsigned int char_count_piped(char *str, char c)
+unsigned int char_count_piped(char *string, char c)
 {
-	unsigned int count = 0;
+	unsigned int counter = 0;
 
-	while (*str != '\0')
+	while (*string != '\0')
 	{
-		if (*str != c)
-			count++;
-		str++;
+		if (*string != c)
+			counter++;
+		string++;
 	}
-	return (count + 1);
+	return (counter + 1);
 }

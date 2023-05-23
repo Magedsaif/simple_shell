@@ -6,7 +6,7 @@
  * 
  * 
 */
-int is_dir(char *command)
+int directory_checkr(char *command)
 {
 	struct stat st;
 

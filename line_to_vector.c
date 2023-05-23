@@ -1,64 +1,72 @@
 #include "shell.h"
 
-char **line_to_vector(char *line)
+char **line_to_vector(char *command, int status)
 {
-	char **vector;
-	char *token, *command;
-	int i = 0;
-	char *line_copy;
+	char *command_copied, *token, *cmde, **argument_vector, *variable;
+	int i = 0, characters_count;
 
-	/*duplicate line*/
-	line_copy = _strdup(line);
-	vector = malloc(sizeof(char *) * (line_count(line) + 1));
-	if (vector == NULL)
+	handle_comments(command);/*lsaaaa*/
+	command_copied = _strdup(command);
+	if (command_copied == NULL)
+		return (NULL); /*can't cpy*/
+	characters_count = char_count(command_copied, ' ');
+	argument_vector = malloc((characters_count + 1) * sizeof(char *));
+	token = _strtok(command_copied, TOK_D);
+	if (token == NULL)
 	{
-		free(line_copy);
+		free(argument_vector);
+		free(command_copied);
 		return (NULL);
 	}
-	/*tokenize at space delimeter*/
-	token = strtok(line_copy, " ");
-	/*exclude $ and $$ */
-		if (_strcmp(token, "$") != 0 && _strcmp(token, "$$") != 0)
-		{
-			command = _strdup(token); /*not on token directly*/
-			vector[i++] = command;
-
-		}
-
-	/*fill vector with tokens  one after another*/
+	/**/
+	if (_strcmp("$$", token) == 0)
+		cmde = get_process_id();
+	else if (_strcmp("$?", token) == 0)
+		cmde = get_status(status);
+	else if ((token[0] == '$') && (token[1]))
+			{
+				variable = _getenv(&token[1]);
+				if(variable)
+					cmde = _strdup(variable);
+				else
+					cmde = _strdup("");
+			}
+	else
+		cmde = _strdup(token);
+	argument_vector[i++] = cmde;
 	while (token != NULL)
 	{
-		token = strtok(NULL, " ");
+		token = _strtok(NULL, TOK_D);
 		if (token != NULL)
 		{
-			if (_strcmp(token, "$$") == 0)
+			if (_strcmp("$$", token) == 0)
+				cmde = get_process_id();
+			else if (_strcmp("$?", token) == 0)
+				cmde = get_status(status);
+			else if ((token[0] == '$') && (token[1]))
 			{
-				int pid = getpid();
-				char pid_str[16]; /*max sizeof pid*/
-				int_to_str(pid, pid_str);
-				command = _strdup(pid_str);
-				vector[i++] = command;
-
-
+				variable = _getenv(&token[1]);
+				if(variable)
+					cmde = _strdup(variable);
+				else
+					cmde = _strdup("");
 			}
-			else if (_strcmp(token, "$") == 0)
-			{
-			}
+				
 			else
-			{
-				command = _strdup(token);
-				vector[i++] = command;
-			}
-
+				cmde = _strdup(token);
+			argument_vector[i++] = cmde;
 		}
-
 	}
-	vector[i] = NULL;
-	free(line_copy);
-	return (vector);
-
+	argument_vector[i] = NULL;
+	free(command_copied);
+	return (argument_vector);
 }
-
+/**
+ * 
+ * 
+ * 
+ * 
+*/
 int line_count(char *line)
 {
 	int i = 0;
@@ -69,6 +77,24 @@ int line_count(char *line)
 	}
 	return (i);
 }
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+*/
+unsigned int char_count(char *string, char character)
+{
+	unsigned int counter = 0;
 
+	while (*string != '\0')
+	{
+		if (*string != character && *(string + 1) == character)
+			counter++;
+		string++;
+	}
+	return (counter + 1);
+}
 
 

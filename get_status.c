@@ -11,7 +11,7 @@ char *get_status(int n)
 	char *status;
 
 	/* Convert the status value to a string */
-	status = num_to_char(n);
+	status = number_to_character(n);
 
 	/* Return the string representation of the status value */
 	return (status);

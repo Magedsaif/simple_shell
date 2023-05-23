@@ -7,44 +7,42 @@
  * or NULL on failure.
  */
 
-char *num_to_char(int num)
+char *number_to_character(int number)
 {
-	int c = 0, tmp = num;
-	char *cp_num;
+	int count = 0, temprory = number;
+	char *copied_number;
 
 	/*Count the digits in the input number*/
-	if (num == 0)
-	{
-		c = 1;
-	}
+	if (number == 0)
+		count = 1;
 	else
 	{
-		while (tmp != 0)
+		while (temprory != 0)
 		{
-			tmp /= 10;
-			c++;
+			temprory = temprory / 10;
+			count++;
 		}
 	}
 
 	/* Allocate memory for the character array */
-	cp_num = malloc(sizeof(char) * (c + 1));
-	if (!cp_num)
+	copied_number = malloc(sizeof(char) * (count + 1));
+	if (!copied_number)
 	{
-		perror("malloc");
+		perror("malloc error");
 		return (NULL);
 	}
 
 	/* Set the null terminator at the end of the array */
-	cp_num[c] = '\0';
+	copied_number[count] = '\0';
 
 	/* Convert each digit of the integer to a character and store in the array */
-	while (c != 0)
+	while (count != 0)
 	{
-		c--;
-		cp_num[c] = '0' + num % 10;
-		num /= 10;
+		count--;
+		copied_number[count] = '0' + number % 10;
+		number = (number / 10) ;
 	}
 
 	/* Return the converted string */
-	return (cp_num);
+	return (copied_number);
 }

@@ -9,11 +9,11 @@
 char *scan_cmd_user(list_paths *current)
 {
 	ssize_t read;
-	size_t n = 0;
+	size_t s = 0;
 	char *command = NULL;
 	/*prompt ($) and getting the input from the user*/
 	write(STDOUT_FILENO, "($) ", 5);
-	read = getline(&command, &n, stdin);
+	read = getline(&command, &s, stdin);
 	/*dealing with end of file or ctrl + D*/
 	if (read == EOF)
 	{

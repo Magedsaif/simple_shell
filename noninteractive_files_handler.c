@@ -9,8 +9,9 @@ char **noninteractive_files_handler(char *file_name, char *shell_name)
 {
 	struct stat fileStat;
 	char *text, **command_lines;
+	size_t letters_read;
 	int fd;
-	size_t letters;
+	
 
 	if (stat(file_name, &fileStat) != -1)
 	{
@@ -22,13 +23,13 @@ char **noninteractive_files_handler(char *file_name, char *shell_name)
 			text = malloc((fileStat.st_size + 1) * sizeof(char));
 			if (!text)
 				return (NULL);
-			letters = read(fd, text, fileStat.st_size);
-			if ((int) letters == -1)
+			letters_read = read(fd, text, fileStat.st_size);
+			if ((int) letters_read == -1)
 			{
 				perror("reading error");
 			}
 			close(fd);
-			text[letters - 1] = '\0';
+			text[letters_read - 1] = '\0';
 			if (text)
 				command_lines = text_to_array(text);
 			return (command_lines);
@@ -38,8 +39,7 @@ char **noninteractive_files_handler(char *file_name, char *shell_name)
 	}
 	else
 	{
-		/*todo print error*/
-		print_cant_open(shell_name, 0, file_name);/*lsaaaaa*/
+		cant_open_handler(shell_name, 0, file_name);
 		exit(127);
 	}
 	return (NULL);

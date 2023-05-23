@@ -10,12 +10,14 @@
 */
 int check_mode(int argc)
 {
-	/*checking for non inter active mode with 2 arguents*/
-	if(argc == 2)
-		return (NON_INTERACTIVE_MODE);
-	/*checking for inter active mode by isatty function*/
-	else if(isatty(STDIN_FILENO) && argc == 1)
+	struct stat stdin_stat;
+
+	fstat(STDIN_FILENO, &stdin_stat);
+	if ( argc == 1 && isatty(STDIN_FILENO))
 		return (INTERACTIVE_MODE);
-	/*else it's an error*/
+	if ((argc >= 1))
+		return (NON_INTERACTIVE_MODE);
+	if ((argc == 1 && !isatty(STDIN_FILENO) ))
+		return (NON_INTERACTIVE_PIPE);
 	return (ERROR);
 }

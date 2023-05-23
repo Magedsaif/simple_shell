@@ -134,9 +134,15 @@ size_t print_list(const list_paths *h)
 	while (h)
 	{
 		if (h->path == NULL)
+		{
 			printf("[0] (nil)\n");
+			fflush(stdout);
+		}
 		else
-			printf("[%i] %s\n", h->len, h->path);
+		{
+			printf("[%d] %s\n", h->len, h->path);
+			fflush(stdout);
+		}
 		h = h->next;
 		count++;
 	}
