@@ -41,7 +41,9 @@ size_t print_list(const list_paths *h);
 void free_list(list_paths *head);
 /* list_paths *add_node(list_paths **head, const char *path);*/
 list_paths *add_node(list_paths **head, char *path);
+unsigned int char_count(char *string, char character);
 /*-----------*/
+
 int _strlen(char *s);
 char *_strdup(char *str);
 int _strcmp(char *s1, char *s2);
@@ -54,13 +56,14 @@ int check_mode(int argc);
 char *check_access(char *line, list_paths *path_list);
 char *scan_cmd_user(list_paths *current);
 void is_exit(char *command,char **command_array, list_paths *current,char *shell_name, int count, int *status);
-void free_array(char** argv);
+void free_array(char **argv);
+void free_all(char *command, char **command_array);
 void command_executer(char *path, char **av, char **env, int *status);
 void scan_cmd_file(char *file);
 char *check_input_file(char *file);
 void free_list(list_paths *head);
 /*char **line_to_vector(char *command, int status);*/
-char **line_to_vector(char *line);
+char **line_to_vector(char *line, int status);
 char *num_to_char(int num);
 void print_error(char *shell_name , int count,char *command_array, int type_of_error);
 char *num_to_char(int num);
@@ -79,8 +82,8 @@ int directory_check(char *command);
 char *number_to_character(int number);
 char **text_to_array(char *text_read);
 void cant_open_handler(char *program_name, int counter, char *file_name);
-unsigned int char_count_piped(char *string, char c);
-
+unsigned int piped_characters_count(char *string, char c);
+char **noninteractive_pipes_handler();
 
 
 

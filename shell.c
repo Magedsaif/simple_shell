@@ -23,7 +23,7 @@ int main(int argc, char *argv[], char *env[])
 			command = scan_cmd_user(current);/*prompt user&get command*/
 		if (!command)
 			continue;
-		command_array = line_to_vector(command);
+		command_array = line_to_vector(command, *status);
 		if (!command_array)
 		{
 			free(command);
@@ -34,14 +34,14 @@ int main(int argc, char *argv[], char *env[])
 		{
 			print_error(argv[0], count, command_array[0], PERMISSION_DENIED);
 			*status = PERMISSION_DENIED;
-			free_l_v(command, command_array);
+			free_all(command, command_array);
 			continue;
 		}
 		/*handle the built in and deal with it's commands*/
 		if (builtin_handler(command, command_array, current, argv[0], count, status) != 0)/*----lsa----*/
 			nonbuiltin_hndler(command_array, env, status,
 			count, current, argv);
-		free_l_v(command, command_array);
+		free_all(command, command_array);
 	}
 	exit(*status);
 }

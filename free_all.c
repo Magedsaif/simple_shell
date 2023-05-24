@@ -1,4 +1,4 @@
-#include<stdlib.h>
+#include"shell.h"
 /* Betty Ok*/
 /**
 * free_all - Free allocated memory
@@ -10,5 +10,5 @@
 void free_all(char *command, char **command_array)
 {
 	free(command);
-	free_vector(command_array);
+	free_array(command_array);
 }

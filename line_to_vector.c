@@ -5,7 +5,7 @@ char **line_to_vector(char *command, int status)
 	char *command_copied, *token, *cmde, **argument_vector, *variable;
 	int i = 0, characters_count;
 
-	handle_comments(command);/*lsaaaa*/
+	/*handle_comments(command);*/
 	command_copied = _strdup(command);
 	if (command_copied == NULL)
 		return (NULL); /*can't cpy*/

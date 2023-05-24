@@ -6,7 +6,7 @@
  * 
  * 
 */
-unsigned int char_count_piped(char *string, char c)
+unsigned int piped_characters_count(char *string, char c)
 {
 	unsigned int counter = 0;
 
