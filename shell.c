@@ -2,7 +2,7 @@
 int main(int argc, char *argv[], char *env[])
 {
 	int *status, count = 0, s = 0, non_interactive = 1, op_mode;
-	char *command, **command_lines, **command_array = NULL, *new_path = NULL;
+	char *command, **command_lines, **command_array = NULL;
 	list_paths *current;
 
 	op_mode = check_mode(argc);/*checking op. mode by getting the arg count*/
@@ -25,8 +25,11 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		command_array = line_to_vector(command);
 		if (!command_array)
+		{
 			free(command);
 			continue;
+		}
+
 		if (directory_check(command_array[0]) == 0)
 		{
 			print_error(argv[0], count, command_array[0], PERMISSION_DENIED);

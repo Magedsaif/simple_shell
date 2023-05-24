@@ -76,6 +76,13 @@ void custom_setenv(char *key, char *value, list_paths *current);
 char **scan_command_files(int op_mode, char *file_name, char *shell_name);
 char **noninteractive_files_handler(char *file_name, char *shell_name);
 int directory_check(char *command);
+char *number_to_character(int number);
+char **text_to_array(char *text_read);
+void cant_open_handler(char *program_name, int counter, char *file_name);
+unsigned int char_count_piped(char *string, char c);
+
+
+
 
 
 

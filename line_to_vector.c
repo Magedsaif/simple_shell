@@ -11,7 +11,7 @@ char **line_to_vector(char *command, int status)
 		return (NULL); /*can't cpy*/
 	characters_count = char_count(command_copied, ' ');
 	argument_vector = malloc((characters_count + 1) * sizeof(char *));
-	token = _strtok(command_copied, TOK_D);
+	token = strtok(command_copied, TOK_D);
 	if (token == NULL)
 	{
 		free(argument_vector);
