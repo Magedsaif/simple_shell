@@ -69,5 +69,15 @@ char *get_status(int n);
 char *get_process_id();
 char *_getenv(const char *name);
 int builtin_handler(char *command, char **command_array ,list_paths *current, char *shell_name , int count, int *status);
+void nonbuiltin_hndler(char **command_array, char *env[], int *status,
+						int count, list_paths *current, char *argv[]);
 void custom_cd(char **command_array);
+void custom_setenv(char *key, char *value, list_paths *current);
+char **scan_command_files(int op_mode, char *file_name, char *shell_name);
+char **noninteractive_files_handler(char *file_name, char *shell_name);
+int directory_check(char *command);
+
+
+
+
 #endif

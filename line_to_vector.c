@@ -36,7 +36,7 @@ char **line_to_vector(char *command, int status)
 	argument_vector[i++] = cmde;
 	while (token != NULL)
 	{
-		token = _strtok(NULL, TOK_D);
+		token = strtok(NULL, TOK_D);
 		if (token != NULL)
 		{
 			if (_strcmp("$$", token) == 0)
@@ -51,7 +51,7 @@ char **line_to_vector(char *command, int status)
 				else
 					cmde = _strdup("");
 			}
-				
+
 			else
 				cmde = _strdup(token);
 			argument_vector[i++] = cmde;
@@ -62,10 +62,10 @@ char **line_to_vector(char *command, int status)
 	return (argument_vector);
 }
 /**
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
 */
 int line_count(char *line)
 {
@@ -78,11 +78,11 @@ int line_count(char *line)
 	return (i);
 }
 /**
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
 */
 unsigned int char_count(char *string, char character)
 {

@@ -16,12 +16,12 @@ char **text_to_array(char *text_read)
 		return (NULL);
 	characters_count = piped_characters_count(copied_text, '\n');
 	command_lines = malloc(characters_count * sizeof(char *));
-	token = _strtok(copied_text, "\n");
+	token = strtok(copied_text, "\n");
 	command = _strdup(token);
 	command_lines[i++] = command;
 	while (token != NULL)
 	{
-		token = _strtok(NULL, "\n");
+		token = strtok(NULL, "\n");
 		if (token != NULL)
 		{
 			command = _strdup(token);

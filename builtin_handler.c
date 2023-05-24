@@ -47,7 +47,7 @@ char *shell_name, int count, int *status)
 			custom_cd(command_array);
 			break;
 		case 3:
-			custom_setenv(command_array[1], command_array[2], list_paths *current);
+			custom_setenv(command_array[1], command_array[2], current);
 			break;
 		default:/*removed a break for betty*/
 			return (-1);
