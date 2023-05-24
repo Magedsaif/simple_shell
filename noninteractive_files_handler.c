@@ -22,6 +22,8 @@ char **noninteractive_files_handler(char *file_name, char *shell_name)
 			fd = open(file_name, O_RDONLY);
 			if (fd  == -1)
 				exit(ERROR);
+			if (fileStat.st_size == 0)
+				exit(0);
 			text = malloc((fileStat.st_size + 1) * sizeof(char));
 			if (!text)
 				return (NULL);

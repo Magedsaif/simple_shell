@@ -8,17 +8,17 @@
  */
 char **text_to_array(char *text_read)
 {
-	char *token, *command, *copied_text;
+	char *token, *command;
 	char **command_lines;
-	int i = 0;
+	int i;
 	unsigned int characters_count;
 
-	copied_text = _strdup(text_read);
-	if (copied_text == NULL)
-		return (NULL);
-	characters_count = piped_characters_count(copied_text, '\n');
+	characters_count = 0;
+	command_lines = NULL;
+	i = 0;
+	characters_count = piped_characters_count(text_read, '\n');
 	command_lines = malloc(characters_count * sizeof(char *));
-	token = strtok(copied_text, "\n");
+	token = strtok(text_read, "\n");
 	command = _strdup(token);
 	command_lines[i++] = command;
 	while (token != NULL)
@@ -31,5 +31,6 @@ char **text_to_array(char *text_read)
 		}
 	}
 	free(text_read);
+	command_lines[i] = NULL;
 	return (command_lines);
 }

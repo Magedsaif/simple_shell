@@ -8,8 +8,11 @@ char **noninteractive_pipes_handler()
 	char c[2048], *text_read, **command_lines;
 	size_t total_characters_read = 0;
 	ssize_t bytes_read;
+	int i, flags;
 
-
+	flags = 0;
+	command_lines = NULL;
+	text_read = NULL;
 	while ((bytes_read = read(STDIN_FILENO, c, 2048)) > 0)
 	{
 		total_characters_read = total_characters_read + bytes_read;
@@ -24,12 +27,20 @@ char **noninteractive_pipes_handler()
 	else
 		c[total_characters_read - 1] = '\0';
 
-	text_read = malloc(sizeof(char) * (total_characters_read));
-	if (!text_read)
+	for (i = 0; c[i]; i++)
+	{
+		if (c[i] != ' ')
+			flags = 1;
+	}
+	if (flags == 0)
 		return (NULL);
-
-	text_read = _strdup(c);
-	if (text_read)
+	total_characters_read = _strlen(c);
+	text_read = (char *)malloc(sizeof(char) * (total_characters_read));
+	if (text_read != NULL)
+	{
+		_strcpy(text_read, c);
+		text_read[total_characters_read] = '\0';
 		command_lines = text_to_array(text_read);
+	}
 	return (command_lines);
 }

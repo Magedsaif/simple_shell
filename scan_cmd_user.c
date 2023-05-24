@@ -12,7 +12,7 @@ char *scan_cmd_user(list_paths *current)
 	size_t s = 0;
 	char *command = NULL;
 	/*prompt ($) and getting the input from the user*/
-	write(STDOUT_FILENO, "($) ", 5);
+	write(STDOUT_FILENO, "($) ", 4);
 	read = getline(&command, &s, stdin);
 	/*dealing with end of file or ctrl + D*/
 	if (read == EOF)
