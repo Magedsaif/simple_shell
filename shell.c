@@ -30,7 +30,7 @@ int main(int argc, char *argv[], char *env[])
 			}
 		}
 		else if (op_mode == INTERACTIVE_MODE)
-			command = scan_cmd_user(current);/*prompt user&get command*
+			command = scan_cmd_user(current); /*prompt user&get command*/
 		if (!command)
 			continue;
 		cmd_arr = line_to_vector(command, *status);
