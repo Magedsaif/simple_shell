@@ -12,6 +12,7 @@ char **line_to_vector(char *command, int status)
 	char **argument_vector;
 
 	command_copied = _strdup(command);
+
 	if (command_copied == NULL)
 		return (NULL);
 
