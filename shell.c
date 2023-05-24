@@ -12,11 +12,11 @@ int main(int argc, char *argv[], char *env[])
 	char *command, **command_lines, **cmd_arr = NULL;
 	list_paths *current;
 
+	status = &s;
 	op_mode = check_mode(argc);
-	current = paths_to_linkedlist();/*turning the path current to a linked */
 	if (op_mode != INTERACTIVE_MODE)/*checking the file after the command*/
 		command_lines = scan_command_files(op_mode, argv[1], argv[0]);
-	status = &s;
+	current = paths_to_linkedlist();/*turning the path current to a linked */
 	while (non_interactive && ++count)
 	{
 		if (op_mode == NON_INTERACTIVE_MODE || op_mode == NON_INTERACTIVE_PIPE)
@@ -34,7 +34,7 @@ int main(int argc, char *argv[], char *env[])
 		if (!command)
 			continue;
 		cmd_arr = line_to_vector(command, *status);
-		if (!(*cmd_arr))
+		if (!cmd_arr)
 		{
 			free(command);
 			continue;

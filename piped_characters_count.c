@@ -12,7 +12,7 @@ unsigned int piped_characters_count(char *string, char c)
 
 	while (*string != '\0')
 	{
-		if (*string != c)
+		if (*string == c)
 			counter++;
 		string++;
 	}

@@ -17,13 +17,13 @@ char **text_to_array(char *text_read)
 	command_lines = NULL;
 	i = 0;
 	characters_count = piped_characters_count(text_read, '\n');
-	command_lines = malloc(characters_count * sizeof(char *));
+	command_lines = (char **)malloc((characters_count + 1) * sizeof(char *));
 	token = strtok(text_read, "\n");
 	command = _strdup(token);
 	command_lines[i++] = command;
 	while (token != NULL)
 	{
-		token = strtok(NULL, "\n");
+		token = _strtok(NULL, "\n");
 		if (token != NULL)
 		{
 			command = _strdup(token);
