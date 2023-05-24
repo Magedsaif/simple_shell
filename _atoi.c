@@ -1,7 +1,7 @@
 #include"shell.h"
 /**
  * _atoi - Converts a string to an integer.
- * @s: The string to be converted.
+ * @s: The string to be converted, input by user
  *
  * Return: The converted integer,
  * or -1 on conversion error.
