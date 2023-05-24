@@ -11,13 +11,14 @@ int main(int argc, char *argv[], char *env[])
 	int *status, count = 0, s = 0, op_mode;
 	char *command, **command_lines, **command_array = NULL;
 	list_paths *current;
-	/*non_interactive = 1*/ 
+	/*non_interactive = 1*/
 	op_mode = check_mode(argc);
 	current = paths_to_linkedlist();/*turning the path current to a linked */
 	if (op_mode != INTERACTIVE_MODE)/*checking the file after the command*/
 		command_lines = scan_command_files(op_mode, argv[1], argv[0]);
 	status = &s;
-
+	while (1)
+	{
 		if (op_mode == NON_INTERACTIVE_PIPE || op_mode == NON_INTERACTIVE_MODE)
 		{
 		command = get_non_interactive_command(command_lines, count);
@@ -25,7 +26,7 @@ int main(int argc, char *argv[], char *env[])
 		else if (op_mode == INTERACTIVE_MODE)
 			command = scan_cmd_user(current);/*prompt user&get command*/
 		if (!command)
-			return;
+			continue;
 		process_command(command, status, &command_array);
 		permission_handler(command_array, count, argv[0],
 		status, command);
@@ -35,5 +36,6 @@ int main(int argc, char *argv[], char *env[])
 			nonbuiltin_hndler(command_array, env, status,
 			count, current, argv);
 		free_all(command, command_array);
+	}
 	exit(*status);
 }
