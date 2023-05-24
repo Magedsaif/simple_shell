@@ -41,11 +41,11 @@ int main(int argc, char *argv[], char *env[])
 		}
 		if (dir_check(cmd_arr[0], argv, count, cmd_arr, status, command) == 0)
 			continue;
-		if (builtin_handler(command,
-		cmd_arr, current, argv[0], count, status) != 0)/*----lsa----*/
+		/*if (builtin_handler(command,cmd_arr, current, argv[0], count, status) != 0)*/
 			nonbuiltin_hndler(cmd_arr, env, status, count, current, argv);
 		free_all(command, cmd_arr);
 	}
 	free_list(current);
 	exit(*status);
 }
+

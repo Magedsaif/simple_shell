@@ -35,7 +35,7 @@ char **noninteractive_pipes_handler()
 	if (flags == 0)
 		return (NULL);
 	total_characters_read = _strlen(c);
-	text_read = (char *)malloc(sizeof(char) * (total_characters_read));
+	text_read = (char *)malloc(sizeof(char) * (total_characters_read + 1));
 	if (text_read != NULL)
 	{
 		_strcpy(text_read, c);
