@@ -38,7 +38,8 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		/*handle the built in and deal with it's commands*/
-		if (builtin_handler(command, command_array, current, argv[0], count, status) != 0)/*----lsa----*/
+		if (builtin_handler(command,
+		command_array, current, argv[0], count, status) != 0)/*----lsa----*/
 			nonbuiltin_hndler(command_array, env, status,
 			count, current, argv);
 		free_all(command, command_array);

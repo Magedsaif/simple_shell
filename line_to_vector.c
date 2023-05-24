@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * line_to_vector - converts a string into an array of strings
+ * @command: the string to convert
+ * @status: an integer representing the status of the command
+ * Return: a pointer to a char array.
+ */
 char **line_to_vector(char *command, int status)
 {
 	char *command_copied, *token, *cmde, **argument_vector, *variable;
@@ -18,15 +23,15 @@ char **line_to_vector(char *command, int status)
 		free(command_copied);
 		return (NULL);
 	}
-	/**/
+
 	if (_strcmp("$$", token) == 0)
 		cmde = get_process_id();
 	else if (_strcmp("$?", token) == 0)
 		cmde = get_status(status);
-	else if ((token[0] == '$') && (token[1]))
+		else if ((token[0] == '$') && (token[1]))
 			{
 				variable = _getenv(&token[1]);
-				if(variable)
+				if (variable)
 					cmde = _strdup(variable);
 				else
 					cmde = _strdup("");
@@ -46,12 +51,11 @@ char **line_to_vector(char *command, int status)
 			else if ((token[0] == '$') && (token[1]))
 			{
 				variable = _getenv(&token[1]);
-				if(variable)
+				if (variable)
 					cmde = _strdup(variable);
 				else
 					cmde = _strdup("");
 			}
-
 			else
 				cmde = _strdup(token);
 			argument_vector[i++] = cmde;
@@ -70,6 +74,7 @@ char **line_to_vector(char *command, int status)
 int line_count(char *line)
 {
 	int i = 0;
+
 	while (*line != '\0')
 	{
 		i++;

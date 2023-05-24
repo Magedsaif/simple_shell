@@ -1,4 +1,12 @@
 #include "shell.h"
+/**
+* cant_open_handler - handles errors that occur when a file cannot be opened
+* @program_name: the name of the program attempting to open the file
+* @counter: a counter variable to keep track.
+* @file_name: the name of the file that cannot be opened
+*
+* Return : void.
+*/
 void cant_open_handler(char *program_name, int counter, char *file_name)
 {
 

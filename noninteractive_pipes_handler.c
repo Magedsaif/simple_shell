@@ -1,7 +1,10 @@
 #include"shell.h"
 /**
- * piped_non_interactive - .
- * Return: .
+ * noninteractive_pipes_handler - processes shell commands with pipes
+ *
+ * @command: string containing shell commands with pipes
+ *
+ * Return: pointer to char array with output
  */
 char **noninteractive_pipes_handler()
 {

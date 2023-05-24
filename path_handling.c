@@ -10,7 +10,7 @@
 list_paths *paths_to_linkedlist()
 {
 	list_paths *paths_linkedlists;
-	char *copied_variable,*path_variable, *token;
+	char *copied_variable, *path_variable, *token;
 
 	paths_linkedlists = NULL;
 
@@ -45,14 +45,14 @@ list_paths *paths_to_linkedlist()
 /**
  * add_node - a function that adds a new node at the beginning of a list_t list
  * @head: pointer to the head of list with the type list_paths
- * @str: pointer to char
+ * @path: pointer to path.
  * Return: the address of the new element, or NULL if it failed
 */
-list_paths *add_node(list_paths **head, char *path) /*remove const from const char *path*/
+list_paths *add_node(list_paths **head, char *path)
 {
 	list_paths *new;
 	int i = 0;
-	char* string_path;
+	char *string_path;
 
 
 	/*getting the count of elements (i), in str array of chars*/

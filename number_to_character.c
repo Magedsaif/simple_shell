@@ -1,7 +1,7 @@
 #include"shell.h"
 /**
- * num_to_char - Converts an integer to a string.
- * @num: The integer to be converted.
+ * number_to_character - Converts an integer to a string.
+ * @number: The integer to be converted.
  *
  * Return: The string representation of the integer,
  * or NULL on failure.
@@ -40,7 +40,7 @@ char *number_to_character(int number)
 	{
 		count--;
 		copied_number[count] = '0' + number % 10;
-		number = (number / 10) ;
+		number = (number / 10);
 	}
 
 	/* Return the converted string */

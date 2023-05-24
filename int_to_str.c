@@ -1,10 +1,10 @@
 #include"shell.h"
 /**
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
 */
 void int_to_str(int n, char *str)
 {

@@ -1,8 +1,10 @@
 #include"shell.h"
 /**
- * text_to_vector - .
- * @text: .
- * Return: .
+ * text_to_array - converts text to an array of strings
+ *
+ * @text_read: the text to convert
+ *
+ * Return: a pointer to a char array containing the converted text
  */
 char **text_to_array(char *text_read)
 {

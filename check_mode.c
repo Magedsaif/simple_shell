@@ -1,4 +1,5 @@
 #include"shell.h"
+/*betty done*/
 /**
  * check_mode - a function that checks the mode of my terminal
  *

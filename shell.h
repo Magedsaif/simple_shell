@@ -55,7 +55,8 @@ void print_env(int *status);
 int check_mode(int argc);
 char *check_access(char *line, list_paths *path_list);
 char *scan_cmd_user(list_paths *current);
-void is_exit(char *command,char **command_array, list_paths *current,char *shell_name, int count, int *status);
+void is_exit(char *command, char **command_array,
+list_paths *current, char *shell_name, int count, int *status);
 void free_array(char **argv);
 void free_all(char *command, char **command_array);
 void command_executer(char *path, char **av, char **env, int *status);
@@ -65,13 +66,15 @@ void free_list(list_paths *head);
 /*char **line_to_vector(char *command, int status);*/
 char **line_to_vector(char *line, int status);
 char *num_to_char(int num);
-void print_error(char *shell_name , int count,char *command_array, int type_of_error);
+void print_error(char *shell_name, int count,
+char *command_array, int type_of_error);
 char *num_to_char(int num);
 int is_dir(char *line);
 char *get_status(int n);
 char *get_process_id();
 char *_getenv(const char *name);
-int builtin_handler(char *command, char **command_array ,list_paths *current, char *shell_name , int count, int *status);
+int builtin_handler(char *command, char **command_array,
+list_paths *current, char *shell_name, int count, int *status);
 void nonbuiltin_hndler(char **command_array, char *env[], int *status,
 						int count, list_paths *current, char *argv[]);
 void custom_cd(char **command_array);
@@ -84,10 +87,9 @@ char **text_to_array(char *text_read);
 void cant_open_handler(char *program_name, int counter, char *file_name);
 unsigned int piped_characters_count(char *string, char c);
 char **noninteractive_pipes_handler();
-
-
-
-
-
+char *get_non_interactive_command(char **command_lines, int count);
+void permission_handler(char **command_array, int count,
+char *executable, int *status, char *command);
+void process_command(char *command, int *status, char ***command_array);
 
 #endif

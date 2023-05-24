@@ -68,14 +68,12 @@ int _strcmp(char *s1, char *s2)
 
 	return ((int)*s1 - (int)*s2);
 }
-
 /**
- * _strncpy - function copies the string pointed to by src
+ * _strcpy - copies a string
  *
- * @dest: destination of copy
- * @src: source array to copy
- * @n: number of bytes from src
- * Return: a pointer to the resulting string dest
+ * @dest: destination string
+ * @src: source string
+ * Return: pointer to destination string
  */
 char *_strcpy(char *dest, char *src)
 {
@@ -91,7 +89,7 @@ char *_strcpy(char *dest, char *src)
 
 
 /**
- * _strncat - concats two arrays
+ * _strcat - concats two arrays
  *
  * @dest: destination of concat
  * @src: source array to concat

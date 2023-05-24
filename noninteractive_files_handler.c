@@ -1,9 +1,11 @@
 #include"shell.h"
 /**
- * file_non_interactive - .
- * @file_name: .
- * @program_name: .
- * Return: .
+ * noninteractive_files_handler - processes shell commands in file
+ * @file_name: name of file with shell commands
+ * @shell_name: name of shell to use
+ * Return: pointer to char array with output
+ * Opens file, reads each line.
+ * pointer to char array with output.
  */
 char **noninteractive_files_handler(char *file_name, char *shell_name)
 {
@@ -11,7 +13,7 @@ char **noninteractive_files_handler(char *file_name, char *shell_name)
 	char *text, **command_lines;
 	size_t letters_read;
 	int fd;
-	
+
 
 	if (stat(file_name, &fileStat) != -1)
 	{
