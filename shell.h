@@ -69,7 +69,7 @@ char *get_process_id();
 char *_getenv(const char *name);
 int builtin_handler(char *command, char **command_array, list_paths *current,
 char *shell_name, int count, int *status,
-list_paths *env_list, char **command_lines, char **argv );
+list_paths *env_list, char **command_lines, char **argv);
 void nonbuiltin_hndler(char **command_array, char *env[], int *status,
 int count, list_paths *current, char *argv[]);
 int custom_cd(char **command_array, char **argument_vector);
@@ -98,7 +98,8 @@ char *_strtok(char *str, const char *delimiters);
 void free_whole(char **command_lines, int count, list_paths *env,
 list_paths *current, char *command, char **command_array);
 void exit_handler(char *command, char **command_array, list_paths *current,
-char *shell_name, int count, int *status,list_paths *env,char **command_lines);
+char *shell_name, int count, int *status, list_paths *env,
+char **command_lines);
 void handle_comments(char *input);
 
 

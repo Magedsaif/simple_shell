@@ -19,7 +19,6 @@ void print_env(int *status)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-
 	/* Set the status to indicate successful completion */
 	*status = 0;
 }
