@@ -91,5 +91,16 @@ char *get_non_interactive_command(char **command_lines, int count);
 void permission_handler(char **command_array, int count,
 char *executable, int *status, char *command);
 void process_command(char *command, int *status, char ***command_array);
+int line_count(char *line);
+char **allocate_vector(int size);
+void free_vector(char **vector);
+char *process_token(char *token, int status);
+int tokenize_command(char *command, int status);
+
+
+
+
+
+
 
 #endif

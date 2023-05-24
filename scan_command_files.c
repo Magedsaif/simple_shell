@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * get_commands - .
- * @mode: .
- * @file_name: .
- * @program_name: .
- * Return: .
+ * scan_command_files - Scans command files based on the operation mode.
+ * @op_mode: The operation mode.
+ * @file_name: The name of the command file.
+ * @shell_name: The name of the shell program.
+ * Return: The array of command lines read from the file.
  */
 char **scan_command_files(int op_mode, char *file_name, char *shell_name)
 {

@@ -7,6 +7,7 @@
  */
 char **line_to_vector(char *command, int status)
 {
+
 	char *command_copied, *token, *cmde, **argument_vector, *variable;
 	int i = 0, characters_count;
 
@@ -28,7 +29,7 @@ char **line_to_vector(char *command, int status)
 		cmde = get_process_id();
 	else if (_strcmp("$?", token) == 0)
 		cmde = get_status(status);
-		else if ((token[0] == '$') && (token[1]))
+	else if ((token[0] == '$') && (token[1]))
 			{
 				variable = _getenv(&token[1]);
 				if (variable)
@@ -66,11 +67,10 @@ char **line_to_vector(char *command, int status)
 	return (argument_vector);
 }
 /**
- *
- *
- *
- *
-*/
+ * line_count - Counts the number of lines in a given string.
+ * @line: The input string.
+ * Return: The number of lines in the string.
+ */
 int line_count(char *line)
 {
 	int i = 0;
@@ -83,12 +83,11 @@ int line_count(char *line)
 	return (i);
 }
 /**
- *
- *
- *
- *
- *
-*/
+ * char_count - Counts the occurrences of a specific character in a string.
+ * @string: The input string.
+ * @character: The character to count.
+ * Return: The number of occurrences of the character in the string.
+ */
 unsigned int char_count(char *string, char character)
 {
 	unsigned int counter = 0;

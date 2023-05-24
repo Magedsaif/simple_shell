@@ -14,11 +14,11 @@ int check_mode(int argc)
 	struct stat stdin_stat;
 
 	fstat(STDIN_FILENO, &stdin_stat);
-	if ( argc == 1 && isatty(STDIN_FILENO))
+	if (argc == 1 && isatty(STDIN_FILENO))
 		return (INTERACTIVE_MODE);
 	if ((argc >= 1))
 		return (NON_INTERACTIVE_MODE);
-	if ((argc == 1 && !isatty(STDIN_FILENO) ))
+	if ((argc == 1 && !isatty(STDIN_FILENO)))
 		return (NON_INTERACTIVE_PIPE);
 	return (ERROR);
 }

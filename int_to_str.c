@@ -1,15 +1,14 @@
 #include"shell.h"
 /**
- *
- *
- *
- *
- *
-*/
+ * int_to_str - Converts an integer to a string.
+ * @n: The integer to convert.
+ * @str: The buffer to store the resulting string.
+ */
 void int_to_str(int n, char *str)
 {
 	int tmp;
 	int i = 0;
+
 	if (n == 0)
 	{
 		str[i++] = '0';
@@ -30,3 +29,5 @@ void int_to_str(int n, char *str)
 	str[i] = '\0'; /*null term*/
 
 }
+
+
