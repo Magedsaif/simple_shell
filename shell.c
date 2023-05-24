@@ -1,9 +1,8 @@
 #include "shell.h"
-
 int main(int argc, char *argv[], char *env[])
 {
 	int *status, count = 0, s = 0, non_interactive = 1, op_mode;
-	char *command,**command_lines, **command_array = NULL, *new_path = NULL;
+	char *command, **command_lines, **command_array = NULL, *new_path = NULL;
 	list_paths *current;
 
 	op_mode = check_mode(argc);/*checking op. mode by getting the arg count*/
@@ -22,7 +21,7 @@ int main(int argc, char *argv[], char *env[])
 		}
 		else if (op_mode == INTERACTIVE_MODE)
 			command = scan_cmd_user(current);/*prompt user&get command*/
-		if(!command)
+		if (!command)
 			continue;
 		command_array = line_to_vector(command);
 		if (!command_array)
@@ -34,10 +33,11 @@ int main(int argc, char *argv[], char *env[])
 			*status = PERMISSION_DENIED;
 			free_l_v(command, command_array);
 			continue;
-		}/*handle the built in and deal with it's commands*/
+		}
+		/*handle the built in and deal with it's commands*/
 		if (builtin_handler(command, command_array, current, argv[0], count, status) != 0)/*----lsa----*/
-			nonbuiltin_handler(command_array, env, status,
-			count, current,argv);
+			nonbuiltin_hndler(command_array, env, status,
+			count, current, argv);
 		free_l_v(command, command_array);
 	}
 	exit(*status);
