@@ -3,6 +3,7 @@
  * int_to_str - Converts an integer to a string.
  * @n: The integer to convert.
  * @str: The buffer to store the resulting string.
+ * Return : nothing
  */
 void int_to_str(int n, char *str)
 {
