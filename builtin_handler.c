@@ -17,10 +17,10 @@ int builtin_handler(char *command, char **command_array, list_paths *current,
 char *shell_name, int count, int *status)
 {
 	int i, n = -1;
-	char *built_in[] = {"env", "exit", "cd", "setenv"};
+	char *built_in[] = {"env", "exit", "cd", "setenv", "unsetenv"};
 
 	/* Check if the entered command is a built-in command */
-	for (i = 0; i < 2; i++)
+	for (i = 0; i < 5; i++)
 	{
 		if (_strcmp(built_in[i], command_array[0]) == 0)
 		{

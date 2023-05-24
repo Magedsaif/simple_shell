@@ -69,7 +69,6 @@ char *num_to_char(int num);
 void print_error(char *shell_name, int count,
 char *command_array, int type_of_error);
 char *num_to_char(int num);
-int is_dir(char *line);
 char *get_status(int n);
 char *get_process_id();
 char *_getenv(const char *name);
@@ -81,7 +80,8 @@ void custom_cd(char **command_array);
 void custom_setenv(char *key, char *value, list_paths *current);
 char **scan_command_files(int op_mode, char *file_name, char *shell_name);
 char **noninteractive_files_handler(char *file_name, char *shell_name);
-int directory_check(char *command);
+int dir_check(char *command, char **argument_vector, int count,
+char **command_array, int *status, char *command_line_before);
 char *number_to_character(int number);
 char **text_to_array(char *text_read);
 void cant_open_handler(char *program_name, int counter, char *file_name);

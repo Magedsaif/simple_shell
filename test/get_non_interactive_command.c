@@ -13,5 +13,8 @@ char *get_non_interactive_command(char **command_lines, int count)
 	if (command_lines[count - 1])
 		return (command_lines[count - 1]);
 	else
-		return (NULL);
+	{
+		free(command_lines);
+		break;
+	}
 }

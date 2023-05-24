@@ -8,34 +8,44 @@
 */
 int main(int argc, char *argv[], char *env[])
 {
-	int *status, count = 0, s = 0, op_mode;
-	char *command, **command_lines, **command_array = NULL;
+	int *status, count = 0, non_interactive = 1, s = 0, op_mode;
+	char *command, **command_lines, **cmd_arr = NULL;
 	list_paths *current;
-	/*non_interactive = 1*/
+
 	op_mode = check_mode(argc);
 	current = paths_to_linkedlist();/*turning the path current to a linked */
 	if (op_mode != INTERACTIVE_MODE)/*checking the file after the command*/
 		command_lines = scan_command_files(op_mode, argv[1], argv[0]);
 	status = &s;
-	while (1)
+	while (non_interactive && ++count)
 	{
-		if (op_mode == NON_INTERACTIVE_PIPE || op_mode == NON_INTERACTIVE_MODE)
+		if (op_mode == NON_INTERACTIVE_MODE || op_mode == NON_INTERACTIVE_PIPE)
 		{
-		command = get_non_interactive_command(command_lines, count);
+			if (command_lines[count - 1])
+				command = command_lines[count - 1];
+			else
+			{
+				free(command_lines);
+				break;
+			}
 		}
 		else if (op_mode == INTERACTIVE_MODE)
 			command = scan_cmd_user(current);/*prompt user&get command*/
 		if (!command)
 			continue;
-		process_command(command, status, &command_array);
-		permission_handler(command_array, count, argv[0],
-		status, command);
-		/*handle the built in and deal with it's commands*/
+		cmd_arr = line_to_vector(command, *status);
+		if (!(*cmd_arr))
+		{
+			free(command);
+			continue;
+		}
+		if (dir_check(cmd_arr[0], argv, count, cmd_arr, status, command) == 0)
+			continue;
 		if (builtin_handler(command,
-		command_array, current, argv[0], count, status) != 0)/*----lsa----*/
-			nonbuiltin_hndler(command_array, env, status,
-			count, current, argv);
-		free_all(command, command_array);
+		cmd_arr, current, argv[0], count, status) != 0)/*----lsa----*/
+			nonbuiltin_hndler(cmd_arr, env, status, count, current, argv);
+		free_all(command, cmd_arr);
 	}
+	free_list(current);
 	exit(*status);
 }
