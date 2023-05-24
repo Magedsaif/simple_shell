@@ -1,4 +1,6 @@
 #include"shell.h"
+/*BETTY OKAY*/
+
 /**
  * print_env - Prints the environment variables.
  * @status: A pointer to an integer variable to set the status.

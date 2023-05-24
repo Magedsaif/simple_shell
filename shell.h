@@ -69,4 +69,5 @@ char *get_status(int n);
 char *get_process_id();
 char *_getenv(const char *name);
 int builtin_handler(char *command, char **command_array ,list_paths *current, char *shell_name , int count, int *status);
+void custom_cd(char **command_array);
 #endif

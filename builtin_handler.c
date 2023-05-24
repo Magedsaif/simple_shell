@@ -17,7 +17,7 @@ int builtin_handler(char *command, char **command_array, list_paths *current,
 char *shell_name, int count, int *status)
 {
 	int i, n = -1;
-	char *built_in[] = {"env", "exit"};
+	char *built_in[] = {"env", "exit", "cd", "setenv"};
 
 	/* Check if the entered command is a built-in command */
 	for (i = 0; i < 2; i++)
@@ -42,6 +42,12 @@ char *shell_name, int count, int *status)
 		case 1:
 			is_exit(command, command_array,
 			 current, shell_name, count, status);
+			break;
+		case 2:
+			custom_cd(command_array);
+			break;
+		case 3:
+			custom_setenv(command_array[1], command_array[2], list_paths *current);
 			break;
 		default:/*removed a break for betty*/
 			return (-1);
