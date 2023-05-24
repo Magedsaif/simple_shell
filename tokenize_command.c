@@ -4,7 +4,7 @@
  * tokenize_command - Tokenizes a command string into an array of strings.
  * @command: The command string to tokenize.
  * @status: An integer representing the status of the command.
- *
+ * @argument_vector:arg v
  * Return: 1 on success, 0 on failure.
  */
 int tokenize_command(char *command, int status, char **argument_vector)
