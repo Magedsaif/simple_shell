@@ -1,3 +1,4 @@
+#include"shell.h"
 /**
 * allocate_vector - Allocates memory for a vector of strings.
 * @size: The size of the vector.

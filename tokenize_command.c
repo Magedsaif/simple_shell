@@ -1,4 +1,3 @@
-
 #include "shell.h"
 /**
  * tokenize_command - Tokenizes a command string into an array of strings.
@@ -10,14 +9,15 @@
 int tokenize_command(char *command, int status, char **argument_vector)
 {
 	int i = 0;
-	char *command_copied = _strdup(command);
+	char *command_copied,*token;
 
+	command_copied = _strdup(command);
 	if (command_copied == NULL)
 	{
 		return (0);
 	}
 
-	char *token = strtok(command_copied, TOK_D);
+	token = strtok(command_copied, TOK_D);
 
 	while (token != NULL)
 	{

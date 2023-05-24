@@ -8,10 +8,10 @@
 */
 int main(int argc, char *argv[], char *env[])
 {
-	int *status, count = 0, s = 0, non_interactive = 1, op_mode;
+	int *status, count = 0, s = 0, op_mode;
 	char *command, **command_lines, **command_array = NULL;
 	list_paths *current;
-
+	/*non_interactive = 1*/ 
 	op_mode = check_mode(argc);
 	current = paths_to_linkedlist();/*turning the path current to a linked */
 	if (op_mode != INTERACTIVE_MODE)/*checking the file after the command*/

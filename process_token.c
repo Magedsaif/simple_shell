@@ -1,3 +1,4 @@
+#include"shell.h"
 /**
  * process_token - Processes a token and returns the corresponding string.
  * @token: The input token to process.
@@ -6,7 +7,10 @@
  */
 char *process_token(char *token, int status)
 {
-	char *cmde = NULL, *variable = NULL;
+	char *cmde, *variable;
+
+	cmde = NULL;
+	variable = NULL;
 
 	if (_strcmp("$$", token) == 0)
 		cmde = get_process_id();

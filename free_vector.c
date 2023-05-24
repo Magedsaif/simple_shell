@@ -1,3 +1,4 @@
+#include"shell.h"
 /**
 * free_vector - Frees the memory allocated for a vector of strings.
 * @vector: The vector to free.

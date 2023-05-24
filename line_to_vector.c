@@ -7,13 +7,16 @@
  */
 char **line_to_vector(char *command, int status)
 {
-	char *command_copied = _strdup(command);
+	char *command_copied;
+	int characters_count;
+	char **argument_vector;
 
+	command_copied = _strdup(command);
 	if (command_copied == NULL)
 		return (NULL);
 
-	int characters_count = char_count(command_copied, ' ');
-	char **argument_vector = allocate_vector(characters_count);
+	characters_count = char_count(command_copied, ' ');
+	argument_vector = allocate_vector(characters_count);
 
 	if (argument_vector == NULL)
 	{
