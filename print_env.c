@@ -16,11 +16,8 @@ void print_env(int *status)
 	/* Iterate over the environment variables until a NULL is encountered */
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		/* Print the current environment variable */
-		printf("%s\n", environ[i]);
-
-		/* Flush the output buffer to ensure immediate visibility */
-		fflush(stdout);
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 
 	/* Set the status to indicate successful completion */
