@@ -7,7 +7,7 @@
  *
  * Return: 1 on success, 0 on failure.
  */
-int tokenize_command(char *command, int status)
+int tokenize_command(char *command, int status, char **argument_vector)
 {
 	int i = 0;
 	char *command_copied = _strdup(command);
@@ -17,7 +17,7 @@ int tokenize_command(char *command, int status)
 		return (0);
 	}
 
-	char *token = strtok(command_copied, TOK_DE);
+	char *token = strtok(command_copied, TOK_D);
 
 	while (token != NULL)
 	{
@@ -28,7 +28,7 @@ int tokenize_command(char *command, int status)
 			free(command_copied);
 			return (0);
 		}
-		token = strtok(NULL, TOK_DE);
+		token = strtok(NULL, TOK_D);
 		i++;
 	}
 	argument_vector[i] = NULL;

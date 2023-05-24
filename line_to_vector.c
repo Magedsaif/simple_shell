@@ -7,12 +7,14 @@
  */
 char **line_to_vector(char *command, int status)
 {
-    char *command_copied = _strdup(command);
-    if (command_copied == NULL)
-        return (NULL);
+	char *command_copied = _strdup(command);
 
-    int characters_count = char_count(command_copied, ' ');
-    char **argument_vector = allocate_vector(characters_count);
+	if (command_copied == NULL)
+		return (NULL);
+
+	int characters_count = char_count(command_copied, ' ');
+	char **argument_vector = allocate_vector(characters_count);
+
 	if (argument_vector == NULL)
 	{
 		free(command_copied);
@@ -20,10 +22,10 @@ char **line_to_vector(char *command, int status)
 	}
 
 	if (!tokenize_command(command, status, argument_vector))
-    {
-        free(argument_vector);
-        return (NULL);
-    }
-    return (argument_vector);
+	{
+		free(argument_vector);
+		return (NULL);
+	}
+	return (argument_vector);
 
 }

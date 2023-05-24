@@ -95,12 +95,6 @@ int line_count(char *line);
 char **allocate_vector(int size);
 void free_vector(char **vector);
 char *process_token(char *token, int status);
-int tokenize_command(char *command, int status);
-
-
-
-
-
-
+int tokenize_command(char *command, int status, char **argument_vector);
 
 #endif
