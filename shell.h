@@ -96,7 +96,8 @@ char **allocate_vector(int size);
 void free_vector(char **vector);
 char *process_token(char *token, int status);
 int tokenize_command(char *command, int status, char **argument_vector);
-char *flags_handler(char *token, char *command, char **argument_vector, int status);
+char *flags_handler(char *token, char *command,
+char **argument_vector, int status);
 char *_strtok(char *str, const char *delimiters);
 
 #endif
