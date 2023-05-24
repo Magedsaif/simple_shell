@@ -1,7 +1,8 @@
 #include "shell.h"
 /**
 * main - Function that run SHELL program
-* @argc: Argument Count.* @argv: Argument vector
+* @argc: Argument Count.
+* @argv: Argument vector
 * @env: The shell environment
 * Return: Exit status of the program
 */
@@ -19,7 +20,7 @@ int main(int argc, char *argv[], char *env[])
 
 		if (op_mode == NON_INTERACTIVE_PIPE || op_mode == NON_INTERACTIVE_MODE)
 		{
-        command = get_non_interactive_command(command_lines, count);
+		command = get_non_interactive_command(command_lines, count);
 		}
 		else if (op_mode == INTERACTIVE_MODE)
 			command = scan_cmd_user(current);/*prompt user&get command*/
